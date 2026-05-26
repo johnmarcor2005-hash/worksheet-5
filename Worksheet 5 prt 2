@@ -1,0 +1,25 @@
+import json
+from pathlib import Path
+
+path = Path("favorite_number.json")
+
+def get_favorite_number():
+    if path.exists():
+        contents = path.read_text()
+        favorite_number = json.loads(contents)
+        return favorite_number
+    else:
+        return None
+
+def save_favorite_number(number):
+    contents = json.dumps(number)
+    path.write_text(contents)
+
+favorite_number = get_favorite_number()
+
+if favorite_number:
+    print(f"I know your favorite number! It is {favorite_number}.")
+else:
+    number = input("What is your favorite number? ")
+    save_favorite_number(number)
+    print("Your favorite number has been saved.")
